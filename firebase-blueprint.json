@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile for JamuKu",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Consultation": {
+      "title": "Consultation Message",
+      "description": "Conversations with AI Herbalist",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "role", "content", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile"
+    },
+    "/users/{userId}/consultations/{messageId}": {
+      "schema": "Consultation",
+      "description": "User consultation chat history"
+    }
+  }
+}
